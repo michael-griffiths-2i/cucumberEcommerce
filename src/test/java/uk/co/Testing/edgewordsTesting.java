@@ -1,21 +1,27 @@
 package uk.co.Testing;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.FindBy;
 
 import static java.lang.Double.parseDouble;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class edgewordsTesting {
+public class edgewordsTesting{
 
-    WebDriver driver = new ChromeDriver();
+    //WebDriver driver = new ChromeDriver();
+    private WebDriver driver;
+    private final sharedDictionary sharedDict;
+
+    public edgewordsTesting(sharedDictionary sharedDict){
+            this.sharedDict = sharedDict;
+            this.driver = (WebDriver)sharedDict.readDict("mydriver");
+
+    }
 
     @Given("I am logged in")
     public void i_am_logged_in() {
@@ -131,7 +137,7 @@ public class edgewordsTesting {
 
 
        try {
-           Thread.sleep(1000);
+           Thread.sleep(3000);
         } catch (InterruptedException e) {
            throw new RuntimeException(e);
         }
@@ -145,8 +151,7 @@ public class edgewordsTesting {
 
     }
 
-    //@FindBy(css ="tr:nth-of-type(1) > .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number > a")
-    //WebElement myOrdersOrderNumber = driver.findElement(By.cssSelector("tr:nth-of-type(1) > .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number > a"));
+
     public void compareOrderNumbers(String orderNumber){
 
         driver.findElement(By.linkText("My account")).click();

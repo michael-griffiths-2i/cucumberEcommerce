@@ -1,4 +1,4 @@
-
+@TestBase
 
 Feature: Checking the order number and discounts on the edgewords site
 
